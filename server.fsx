@@ -54,6 +54,6 @@ let app =
     path "/scripts/tutorial.js" >=> GET >=> Files.file @".\scripts\tutorial.js"
     path "/api/comments" >=> choose [ 
       GET >=> Writers.setMimeType "application/json; charset=utf-8" >=> warbler (fun context -> getComments)
-      POST >=> warbler(fun context -> postComment) ] ]
+      POST >=> Writers.setMimeType "application/json; charset=utf-8" >=> warbler(fun context -> postComment) ] ]
   
 startWebServer defaultConfig app 
